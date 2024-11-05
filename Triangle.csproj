@@ -77,5 +77,10 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Skaleeni kolmnurk.jpg" />
+    <Content Include="Vordkulgne.png" />
+    <Content Include="Vordhaarne.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
