@@ -15,18 +15,18 @@ namespace Triangle
     public partial class Form2 : Form
     {
         Button btn;
-        TextBox txtA, txtB, txtnurkA, txtnurkB, txtnurkC, txtH, txtC;
+        TextBox txtA, txtB, txtnurk, txtH, txtC;
         ListView listView1;
-        Label labelA, labelB, labelnurkA, labelnurkB, labelnurkC, labelH, labelC;
+        Label labelA, labelB, labelnurk, labelH, labelC;
         PictureBox pictureBox;
         public Form2()
         {
             this.Height = 600;
             this.Width = 900;
-            this.Text = "Töö kolmnurgaga";
+            this.Text = "Работа с треугольником";
             //Button
             btn = new Button();
-            btn.Text = "Käivitamine";
+            btn.Text = "Запуск";
             btn.Font = new Font("Algerian", 18, FontStyle.Italic);
             btn.AutoSize = true;
             btn.FlatAppearance.BorderSize = 6;
@@ -88,60 +88,26 @@ namespace Triangle
             labelC.Location = new Point(50, 340);
             Controls.Add(labelC);
 
-            //TextBox - txtnurkA
-            txtnurkA = new TextBox();
-            txtnurkA.Location = new Point(160, 370);
-            txtnurkA.Font = new Font("Algerian", 13);
-            txtnurkA.Width = 100;
-            txtnurkA.Height = 80;
-            Controls.Add(txtnurkA);
+            //TextBox - txtnurk
+            txtnurk = new TextBox();
+            txtnurk.Location = new Point(160, 370);
+            txtnurk.Font = new Font("Algerian", 13);
+            txtnurk.Width = 100;
+            txtnurk.Height = 80;
+            Controls.Add(txtnurk);
 
-            //labelnurkA
-            labelnurkA = new Label();
-            labelnurkA.Text = "Угол A";
-            labelnurkA.Font = new Font("Arial", 13, FontStyle.Italic);
-            labelnurkA.ForeColor = Color.Crimson;
-            labelnurkA.AutoSize = true;
-            labelnurkA.Location = new Point(50, 370);
-            Controls.Add(labelnurkA);
-
-            //TextBox - txtnurkB
-            txtnurkB = new TextBox();
-            txtnurkB.Location = new Point(160, 400);
-            txtnurkB.Font = new Font("Algerian", 13);
-            txtnurkB.Width = 100;
-            txtnurkB.Height = 80;
-            Controls.Add(txtnurkB);
-
-            //labelnurkB
-            labelnurkB = new Label();
-            labelnurkB.Text = "Угол  B";
-            labelnurkB.Font = new Font("Arial", 13, FontStyle.Italic);
-            labelnurkB.ForeColor = Color.Crimson;
-            labelnurkB.AutoSize = true;
-            labelnurkB.Location = new Point(50, 400);
-            Controls.Add(labelnurkB);
-
-            //TextBox - txtnurkC
-            txtnurkC = new TextBox();
-            txtnurkC.Location = new Point(160, 430);
-            txtnurkC.Font = new Font("Algerian", 13);
-            txtnurkC.Width = 100;
-            txtnurkC.Height = 80;
-            Controls.Add(txtnurkC);
-
-            //labelnurkC
-            labelnurkC = new Label();
-            labelnurkC.Text = "Угол C";
-            labelnurkC.Font = new Font("Arial", 13, FontStyle.Italic);
-            labelnurkC.ForeColor = Color.Crimson;
-            labelnurkC.AutoSize = true;
-            labelnurkC.Location = new Point(50, 430);
-            Controls.Add(labelnurkC);
+            //labelnurk
+            labelnurk = new Label();
+            labelnurk.Text = "Угол";
+            labelnurk.Font = new Font("Arial", 13, FontStyle.Italic);
+            labelnurk.ForeColor = Color.Crimson;
+            labelnurk.AutoSize = true;
+            labelnurk.Location = new Point(50, 370);
+            Controls.Add(labelnurk);
 
             //TextBox - txtH
             txtH = new TextBox();
-            txtH.Location = new Point(160, 460);
+            txtH.Location = new Point(160, 400);
             txtH.Font = new Font("Algerian", 13);
             txtH.Width = 100;
             txtH.Height = 80;
@@ -153,7 +119,7 @@ namespace Triangle
             labelH.Font = new Font("Arial", 13, FontStyle.Italic);
             labelH.ForeColor = Color.Crimson;
             labelH.AutoSize = true;
-            labelH.Location = new Point(50, 460);
+            labelH.Location = new Point(50, 400);
             Controls.Add(labelH);
 
             //listView1
@@ -181,16 +147,19 @@ namespace Triangle
 
         private void PictureBox_Paint(object sender, PaintEventArgs e)
         {
-            if (!double.TryParse(txtA.Text, out double a) || !double.TryParse(txtB.Text, out double b) || !double.TryParse(txtC.Text, out double angleDegrees))
+            if (!double.TryParse(txtA.Text, out double a) || 
+                !double.TryParse(txtB.Text, out double b) ||
+                !double.TryParse(txtC.Text, out double c) ||
+                !double.TryParse(txtnurk.Text, out double nurgaAste))
             {
                 return;
             }
 
-            double angleRadians = angleDegrees * Math.PI / 180;
+            double raadiaanNurk = nurgaAste * Math.PI / 180;
             int x2 = 100 + (int)(a * 10); 
             int y2 = 200;
-            int x3 = 100 + (int)(b * Math.Cos(angleRadians) * 10);
-            int y3 = 200 - (int)(b * Math.Sin(angleRadians) * 10);
+            int x3 = 100 + (int)(b * Math.Cos(raadiaanNurk) * 10);
+            int y3 = 200 - (int)(b * Math.Sin(raadiaanNurk) * 10);
 
             Point p1 = new Point(100, 200);
             Point p2 = new Point(x2, y2);
@@ -205,24 +174,20 @@ namespace Triangle
 
         private void Btn_Click(object sender, EventArgs e)
         {
-            double a, b, nurkA, nurkB, nurkC, h,c;
+            double a, b, nurk, h,c;
             a = Convert.ToDouble(txtA.Text);
             b = Convert.ToDouble(txtB.Text);
             h = Convert.ToDouble(txtH.Text);
             c = Convert.ToDouble(txtC.Text);
-            nurkA = Convert.ToDouble(txtnurkA.Text);
-            nurkB = Convert.ToDouble(txtnurkB.Text);
-            nurkC = Convert.ToDouble(txtnurkC.Text);
+            nurk = Convert.ToDouble(txtnurk.Text);
 
-            Triangle triangle = new Triangle(a, b, c, h, nurkA, nurkB, nurkC);
+            Triangle triangle = new Triangle(a, b, c, h, nurk);
             listView1.Items.Clear();
             listView1.Items.Add("Сторона A");
             listView1.Items.Add("Сторона B");
             listView1.Items.Add("Сторона C");
             listView1.Items.Add("Высота");
-            listView1.Items.Add("Угол A");
-            listView1.Items.Add("Угол B");
-            listView1.Items.Add("Угол C");
+            listView1.Items.Add("Угол");
             listView1.Items.Add("Полупериметра");
             listView1.Items.Add("Площадь");
             listView1.Items.Add("Существует?");
@@ -231,18 +196,16 @@ namespace Triangle
             listView1.Items[1].SubItems.Add(triangle.outputB());
             listView1.Items[2].SubItems.Add(triangle.outputC());
             listView1.Items[3].SubItems.Add(triangle.outputH());
-            listView1.Items[4].SubItems.Add(triangle.outputnurkA());
-            listView1.Items[5].SubItems.Add(triangle.outputnurkB());
-            listView1.Items[6].SubItems.Add(triangle.outputnurkC());
-            listView1.Items[7].SubItems.Add(Convert.ToString(triangle.Poolperimeetrit()));
-            listView1.Items[8].SubItems.Add(Convert.ToString(triangle.PindalaArvutamine()));
+            listView1.Items[4].SubItems.Add(triangle.outputnurk());
+            listView1.Items[5].SubItems.Add(Convert.ToString(triangle.Poolperimeetrit()));
+            listView1.Items[6].SubItems.Add(Convert.ToString(triangle.PindalaArvutamine()));
             if (triangle.ExistTriange)
             {
-                listView1.Items[9].SubItems.Add("Существует");
+                listView1.Items[7].SubItems.Add("Существует");
             }
             else
             {
-                listView1.Items[9].SubItems.Add("Не существует");
+                listView1.Items[7].SubItems.Add("Не существует");
             }
             //Метод, позволяющий определить тип треугольника и определив тип,
             //меняющий отображаемую картинку на соответствующую.
@@ -252,23 +215,23 @@ namespace Triangle
             {
                 if (triangle.TriangleType_Form2 == "Võrdkülgne")
                 {
-                    listView1.Items[10].SubItems.Add("Võrdkülgne");
+                    listView1.Items[8].SubItems.Add("Võrdkülgne");
                 }
                 else if (triangle.TriangleType_Form2 == "Võrdhaarne")
                 {
-                    listView1.Items[10].SubItems.Add("Võrdhaarne");
+                    listView1.Items[8].SubItems.Add("Võrdhaarne");
                 }
                 else if (triangle.TriangleType_Form2 == "Täisnurkne")
                 {
-                    listView1.Items[10].SubItems.Add("Täisnurkne");
+                    listView1.Items[8].SubItems.Add("Täisnurkne");
                 }
                 else if (triangle.TriangleType_Form2 == "Teravnurkne")
                 {
-                    listView1.Items[10].SubItems.Add("Teravnurkne");
+                    listView1.Items[8].SubItems.Add("Teravnurkne");
                 }
                 else if (triangle.TriangleType_Form2 == "Nürinurkne")
                 {
-                    listView1.Items[10].SubItems.Add("Nürinurkne");
+                    listView1.Items[8].SubItems.Add("Nürinurkne");
                 }
             }
             pictureBox.Invalidate(); // Обновляем PictureBox, чтобы отобразить новую картинку

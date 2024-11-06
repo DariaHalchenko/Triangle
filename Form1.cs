@@ -22,11 +22,11 @@ namespace Triangle
         {
             this.Height = 500;
             this.Width = 800;
-            this.Text = "Töö kolmnurgaga";
+            this.Text = "Работа с треугольником";
             //Button
             btn = new Button();
-            btn.Text = "Käivitamine";
-            btn.Font = new Font("Algerian", 18, FontStyle.Italic);
+            btn.Text = "Запуск";
+            btn.Font = new Font("Arial", 18, FontStyle.Italic);
             btn.AutoSize = true;
             btn.FlatAppearance.BorderSize = 6;
             btn.FlatAppearance.BorderColor = Color.Pink;
@@ -39,7 +39,7 @@ namespace Triangle
             //TextBox - txtA
             txtA = new TextBox();
             txtA.Location = new Point(160,350);
-            txtA.Font = new Font("Algerian", 13);
+            txtA.Font = new Font("Arial", 13);
             txtA.Width = 100;
             txtA.Height = 80;
             Controls.Add(txtA);
@@ -57,7 +57,7 @@ namespace Triangle
             //TextBox - txtB
             txtB = new TextBox();
             txtB.Location = new Point(160, 380);
-            txtB.Font = new Font("Algerian", 13);
+            txtB.Font = new Font("Arial", 13);
             txtB.Width = 100;
             txtB.Height = 80;
             Controls.Add(txtB);
@@ -74,7 +74,7 @@ namespace Triangle
             //TextBox - txtC
             txtC = new TextBox();
             txtC.Location = new Point(160, 410);
-            txtC.Font = new Font("Algerian", 13);
+            txtC.Font = new Font("Arial", 13);
             txtC.Width = 100;
             txtC.Height = 80;
             Controls.Add(txtC);
@@ -121,6 +121,9 @@ namespace Triangle
             listView1.Items.Add("Сторона C");
             listView1.Items.Add("Периметр");
             listView1.Items.Add("Площадь");
+            listView1.Items.Add("Высота к стороне А");
+            listView1.Items.Add("Высота к стороне В");
+            listView1.Items.Add("Высота к стороне С");
             listView1.Items.Add("Существует?");
             listView1.Items.Add("Спецификатор");
             listView1.Items[0].SubItems.Add(triangle.outputA());
@@ -128,13 +131,16 @@ namespace Triangle
             listView1.Items[2].SubItems.Add(triangle.outputC());
             listView1.Items[3].SubItems.Add(Convert.ToString(triangle.Perimeter()));
             listView1.Items[4].SubItems.Add(Convert.ToString(triangle.Surface()));
+            listView1.Items[5].SubItems.Add(Convert.ToString(triangle.HeightA()));
+            listView1.Items[6].SubItems.Add(Convert.ToString(triangle.HeightB()));
+            listView1.Items[7].SubItems.Add(Convert.ToString(triangle.HeightC()));
             if (triangle.ExistTriange)
             {
-                listView1.Items[5].SubItems.Add("Существует");
+                listView1.Items[8].SubItems.Add("Существует");
             }
             else
             {
-                listView1.Items[5].SubItems.Add("Не существует");
+                listView1.Items[8].SubItems.Add("Не существует");
             }
             //Метод, позволяющий определить тип треугольника и определив тип,
             //меняющий отображаемую картинку на соответствующую.
@@ -143,27 +149,27 @@ namespace Triangle
             {
                 if (triangle.TriangleType == "Võrdkülgne")
                 {
-                    listView1.Items[6].SubItems.Add("Võrdkülgne");
-                    pictureBox.Image = Image.FromFile(@"..\..\Vordkulgne.png"); // Картинка для равностороннего треугольника
+                    listView1.Items[9].SubItems.Add("Võrdkülgne");
+                    pictureBox.Image = Image.FromFile(@"..\..\Vordkulgne.png"); 
                 }
                 else if (triangle.TriangleType == "Võrdhaarne")
                 {
-                    listView1.Items[6].SubItems.Add("Võrdhaarne");
-                    pictureBox.Image = Image.FromFile(@"..\..\Vordhaarne.png"); // Картинка для равнобедренного треугольника
+                    listView1.Items[9].SubItems.Add("Võrdhaarne");
+                    pictureBox.Image = Image.FromFile(@"..\..\Vordhaarne.png"); 
                 }
                 else if (triangle.TriangleType == "Skaleeni kolmnurk")
                 {
-                    listView1.Items[6].SubItems.Add("Skaleeni kolmnurk");
-                    pictureBox.Image = Image.FromFile(@"..\..\Skaleeni kolmnurk.jpg"); // Картинка для разностороннего треугольника
+                    listView1.Items[9].SubItems.Add("Skaleeni kolmnurk");
+                    pictureBox.Image = Image.FromFile(@"..\..\Skaleeni kolmnurk.jpg"); 
                 }
                 else
                 {
-                    pictureBox.Image = null; // Если тип треугольника не определен
+                    pictureBox.Image = null; 
                 }
             }
             else
             {
-                pictureBox.Image = null; // Если треугольник не существует
+                pictureBox.Image = null; 
             }
 
             pictureBox.Invalidate(); // Обновляем PictureBox, чтобы отобразить новую картинку

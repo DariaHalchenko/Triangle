@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 
 namespace Triangle
 {
@@ -11,11 +12,10 @@ namespace Triangle
         public double a;
         public double b;
         public double c;
-        public double h;
+        //одно поле, помимо a,b и c, это высота
+        public double h; 
         //одно поле, помимо a,b и c, у меня это угол
-        public double nurkA;
-        public double nurkB;
-        public double nurkC;
+        public double nurk;
         public Triangle() { } //один конструктор без параметров
         public Triangle(double A, double B, double C)
         {
@@ -23,14 +23,12 @@ namespace Triangle
             b = B;
             c = C;
         }
-        public Triangle(double A, double B, double C, double H, double NurkA, double NurkB, double NurkC)
+        public Triangle(double A, double B, double C, double H, double Nurk)
         {
             a = A;
             b = B;
             c = C;
-            nurkA = NurkA;
-            nurkB = NurkB;
-            nurkC = NurkC;
+            nurk = Nurk;
             h = H;
         }
         public string outputA()
@@ -45,17 +43,9 @@ namespace Triangle
         {
             return Convert.ToString(c);
         }
-        public string outputnurkA()
+        public string outputnurk()
         {
-            return Convert.ToString(nurkA);
-        }
-        public string outputnurkB()
-        {
-            return Convert.ToString(nurkB);
-        }
-        public string outputnurkC()
-        {
-            return Convert.ToString(nurkC);
+            return Convert.ToString(nurk);
         }
         public string outputH()
         {
@@ -84,9 +74,28 @@ namespace Triangle
         //одно свойство
         public double PindalaArvutamine()
         {
-            return 0.5 * a * b * Math.Abs(Math.Sin(nurkA * Math.PI / 180));
+            return 0.5 * a * b * Math.Sin(nurk);
         }
-        
+        // Метод для нахождения высоты к стороне a
+        public double HeightA()
+        {
+            double s = Surface();
+            return (2 * s) / a;
+        }
+
+        // Метод для нахождения высоты к стороне b
+        public double HeightB()
+        {
+            double s = Surface();
+            return (2 * s) / b;
+        }
+
+        // Метод для нахождения высоты к стороне c
+        public double HeightC()
+        {
+            double s = Surface();
+            return (2 * s) / c;
+        }
         public double GetSetA
         {
             get
@@ -142,6 +151,11 @@ namespace Triangle
                 }
             }
         }
+        private double Leida_nurki(double x, double y, double z)
+        {
+            //нахождения арккосинуса (обратная функция косинуса)
+            return Math.Acos((y * y + z * z - x * x) / (2 * y * z)) * (180 / Math.PI);
+        }
         public string TriangleType_Form2
         {
             get
@@ -158,12 +172,15 @@ namespace Triangle
                     }
                     else
                     {
+                        double nurk = Leida_nurki(a, b, c);
+                        double nurkB = Leida_nurki(b, a, c);
+                        double nurkC = Leida_nurki(c, a, b);
 
-                        if (nurkA == 90 || nurkB == 90 || nurkC == 90)
+                        if (nurk == 90 || nurkB == 90 || nurkC == 90)
                         {
                             return "Täisnurkne";  // Прямоугольный
                         }
-                        else if (nurkA < 90 && nurkB < 90 && nurkC < 90)
+                        else if (nurk < 90 && nurkB < 90 && nurkC < 90)
                         {
                             return "Teravnurkne";  // Остроугольный
                         }
@@ -177,6 +194,33 @@ namespace Triangle
                 {
                     return "Tundmatu tüüp";  // Неопределенный
                 }
+            }
+        }
+        // Метод для сохранения треугольников в XML-файл
+        public static void Salvesta(List<Triangle> triangles, string filePath = "kolmnurgad.xml")
+        {
+            using (XmlWriter xmlwriter = XmlWriter.Create(filePath))
+            {
+                xmlwriter.WriteStartDocument();
+                xmlwriter.WriteStartElement("Triangles");
+
+                foreach (var triangle in triangles)
+                {
+                    xmlwriter.WriteStartElement("Triangle");
+
+                    // Сохранение всех полей и свойств треугольника
+                    xmlwriter.WriteElementString("Сторона A", triangle.a.ToString());
+                    xmlwriter.WriteElementString("Сторона B", triangle.b.ToString());
+                    xmlwriter.WriteElementString("Сторона C", triangle.c.ToString());
+                    xmlwriter.WriteElementString("Высота", triangle.h.ToString());
+                    xmlwriter.WriteElementString("Угол", triangle.nurk.ToString());
+                    xmlwriter.WriteElementString("Полупериметра", triangle.Poolperimeetrit().ToString());
+                    xmlwriter.WriteElementString("Площадь", triangle.PindalaArvutamine().ToString());
+                    xmlwriter.WriteElementString("Спецификатор", triangle.TriangleType_Form2);
+                    xmlwriter.WriteEndElement(); // Закрываем элемент Triangle
+                }
+                xmlwriter.WriteEndElement(); // Закрываем элемент Triangles
+                xmlwriter.WriteEndDocument(); // Завершаем документ
             }
         }
     }
