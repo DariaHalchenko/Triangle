@@ -202,6 +202,13 @@ namespace Triangle
         {
             try
             {
+                // Настройка XML Writer для форматированного вывода
+                XmlWriterSettings vormingus = new XmlWriterSettings();
+
+                vormingus.Indent = true; //  отступы для удобочитаемости
+                vormingus.IndentChars = "    "; // 4 пробела для отступов
+                vormingus.NewLineOnAttributes = false; // Атрибуты оставляются на той же строке
+                
                 // Создается XML Writer для записи в файл
                 using (XmlWriter xmlwriter = XmlWriter.Create(filePath))
                 {
