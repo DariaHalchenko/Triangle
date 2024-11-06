@@ -17,6 +17,7 @@ namespace Triangle
         TextBox txtA, txtB, txtC;
         ListView listView1;
         Label labelA, labelB, labelC;
+
         PictureBox pictureBox;
         public Form1()
         {

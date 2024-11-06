@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using System.Xml;
 
 namespace Triangle
@@ -197,30 +198,38 @@ namespace Triangle
             }
         }
         // Метод для сохранения треугольников в XML-файл
-        public static void Salvesta(List<Triangle> triangles, string filePath = "kolmnurgad.xml")
+        public static void Salvesta(List<Triangle> triangles, string filePath = @"..\..\kolmnurgad.xml")
         {
-            using (XmlWriter xmlwriter = XmlWriter.Create(filePath))
+            try
             {
-                xmlwriter.WriteStartDocument();
-                xmlwriter.WriteStartElement("Triangles");
-
-                foreach (var triangle in triangles)
+                using (XmlWriter xmlwriter = XmlWriter.Create(filePath))
                 {
-                    xmlwriter.WriteStartElement("Triangle");
+                    xmlwriter.WriteStartDocument();
+                    xmlwriter.WriteStartElement("Triangles");
 
-                    // Сохранение всех полей и свойств треугольника
-                    xmlwriter.WriteElementString("Сторона A", triangle.a.ToString());
-                    xmlwriter.WriteElementString("Сторона B", triangle.b.ToString());
-                    xmlwriter.WriteElementString("Сторона C", triangle.c.ToString());
-                    xmlwriter.WriteElementString("Высота", triangle.h.ToString());
-                    xmlwriter.WriteElementString("Угол", triangle.nurk.ToString());
-                    xmlwriter.WriteElementString("Полупериметра", triangle.Poolperimeetrit().ToString());
-                    xmlwriter.WriteElementString("Площадь", triangle.PindalaArvutamine().ToString());
-                    xmlwriter.WriteElementString("Спецификатор", triangle.TriangleType_Form2);
-                    xmlwriter.WriteEndElement(); // Закрываем элемент Triangle
+                    foreach (var triangle in triangles)
+                    {
+                        xmlwriter.WriteStartElement("Triangle");
+
+                        // Сохранение всех полей и свойств треугольника
+                        xmlwriter.WriteElementString("Сторона A", triangle.a.ToString());
+                        xmlwriter.WriteElementString("Сторона B", triangle.b.ToString());
+                        xmlwriter.WriteElementString("Сторона C", triangle.c.ToString());
+                        xmlwriter.WriteElementString("Высота", triangle.h.ToString());
+                        xmlwriter.WriteElementString("Угол", triangle.nurk.ToString());
+                        xmlwriter.WriteElementString("Полупериметра", triangle.Poolperimeetrit().ToString());
+                        xmlwriter.WriteElementString("Площадь", triangle.PindalaArvutamine().ToString());
+                        xmlwriter.WriteElementString("Спецификатор", triangle.TriangleType_Form2);
+                        xmlwriter.WriteEndElement(); // Закрываем элемент Triangle
+                    }
+
+                    xmlwriter.WriteEndElement(); // Закрываем элемент Triangles
+                    xmlwriter.WriteEndDocument(); // Завершаем документ
                 }
-                xmlwriter.WriteEndElement(); // Закрываем элемент Triangles
-                xmlwriter.WriteEndDocument(); // Завершаем документ
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ошибка при сохранении в файл: " + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

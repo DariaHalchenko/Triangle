@@ -19,6 +19,7 @@ namespace Triangle
         ListView listView1;
         Label labelA, labelB, labelnurk, labelH, labelC;
         PictureBox pictureBox;
+        List<Triangle> triangles = new List<Triangle> { };
         public Form2()
         {
             this.Height = 600;
@@ -235,6 +236,7 @@ namespace Triangle
                 }
             }
             pictureBox.Invalidate(); // Обновляем PictureBox, чтобы отобразить новую картинку
+            Triangle.Salvesta(triangles);
         }
     }
 }
