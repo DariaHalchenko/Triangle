@@ -210,7 +210,7 @@ namespace Triangle
                 vormingus.NewLineOnAttributes = false; // Атрибуты оставляются на той же строке
                 
                 // Создается XML Writer для записи в файл
-                using (XmlWriter xmlwriter = XmlWriter.Create(filePath))
+                using (XmlWriter xmlwriter = XmlWriter.Create(filePath, vormingus))
                 {
                     xmlwriter.WriteStartDocument(); // Начинает
                     xmlwriter.WriteStartElement("Triangles"); // Открывает элемент "Triangles"

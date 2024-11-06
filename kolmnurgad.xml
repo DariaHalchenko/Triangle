@@ -1,1 +1,13 @@
-﻿<?xml version="1.0" encoding="utf-8"?><Triangles><Triangle><Külg_A>14</Külg_A><Külg_B>15</Külg_B><Külg_C>17</Külg_C><Kõrgus>23</Kõrgus><Nurk>60</Nurk><Poolperimeeter>23</Poolperimeeter><Piirkond>90,932667397366</Piirkond><Täpsustaja>Teravnurkne</Täpsustaja></Triangle></Triangles>
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Triangles>
+    <Triangle>
+        <Külg_A>15</Külg_A>
+        <Külg_B>14</Külg_B>
+        <Külg_C>15</Külg_C>
+        <Kõrgus>23</Kõrgus>
+        <Nurk>30</Nurk>
+        <Poolperimeeter>22</Poolperimeeter>
+        <Piirkond>52,5</Piirkond>
+        <Täpsustaja>Võrdhaarne</Täpsustaja>
+    </Triangle>
+</Triangles>
