@@ -14,20 +14,23 @@ namespace Triangle
     //В этой форме применяю свои методы, аргументы, конструкторы и  свойства.
     public partial class Form2 : Form
     {
-        Button btn;
+        Button btn, color;
         TextBox txtA, txtB, txtnurk, txtH, txtC;
         ListView listView1;
         Label labelA, labelB, labelnurk, labelH, labelC;
         PictureBox pictureBox;
-        List<Triangle> triangles = new List<Triangle> { };
+        List<Triangle> triangles = new List<Triangle> {};
+        ColorDialog colordialog;
+        private Color taidab = Color.White;
         public Form2()
         {
             this.Height = 600;
-            this.Width = 900;
-            this.Text = "Работа с треугольником";
-            //Button
+            this.Width = 920;
+            this.Text = "Töötamine kolmnurgaga";
+            this.BackColor = Color.MintCream;
+            //Button - btn
             btn = new Button();
-            btn.Text = "Запуск";
+            btn.Text = "Käivitamine";
             btn.Font = new Font("Algerian", 18, FontStyle.Italic);
             btn.AutoSize = true;
             btn.FlatAppearance.BorderSize = 6;
@@ -38,116 +41,153 @@ namespace Triangle
             Controls.Add(btn);
             btn.Click += Btn_Click;
 
+            //Button - color
+            color = new Button();
+            color.Text = "Värvi";
+            color.Font = new Font("Algerian", 18, FontStyle.Italic);
+            color.AutoSize = true;
+            color.FlatAppearance.BorderSize = 6;
+            color.FlatAppearance.BorderColor = Color.Pink;
+            color.FlatStyle = FlatStyle.Flat;
+            color.Location = new Point(450, 80);
+            color.BackColor = Color.Plum;
+            Controls.Add(color);
+            color.Click += Color_Click;
+
             //TextBox - txtA
             txtA = new TextBox();
             txtA.Location = new Point(160, 280);
-            txtA.Font = new Font("Algerian", 13);
+            txtA.Font = new Font("Arial", 13, FontStyle.Bold);
             txtA.Width = 100;
             txtA.Height = 80;
+            txtA.BackColor = Color.MistyRose;
+            txtA.ForeColor = Color.MediumVioletRed;
             Controls.Add(txtA);
 
-            //LabelA
+            //Label - labelA
             labelA = new Label();
-            labelA.Text = "Сторона A";
-            labelA.Font = new Font("Arial", 13, FontStyle.Italic);
+            labelA.Text = "Külg A";
+            labelA.Font = new Font("Algerian", 13, FontStyle.Bold | FontStyle.Italic);
             labelA.ForeColor = Color.Crimson;
             labelA.AutoSize = true;
-            labelA.Location = new Point(50, 280);
+            labelA.Location = new Point(70, 280);
             Controls.Add(labelA);
 
             //TextBox - txtB
             txtB = new TextBox();
             txtB.Location = new Point(160, 310);
-            txtB.Font = new Font("Algerian", 13);
+            txtB.Font = new Font("Arial", 13, FontStyle.Bold);
             txtB.Width = 100;
             txtB.Height = 80;
+            txtB.BackColor = Color.MistyRose;
+            txtB.ForeColor = Color.MediumVioletRed;
             Controls.Add(txtB);
 
-            //labelB
+            //Label - labelB
             labelB = new Label();
-            labelB.Text = "Сторона B";
-            labelB.Font = new Font("Arial", 13, FontStyle.Italic);
+            labelB.Text = "Külg B";
+            labelB.Font = new Font("Algerian", 13, FontStyle.Bold | FontStyle.Italic);
             labelB.ForeColor = Color.Crimson;
             labelB.AutoSize = true;
-            labelB.Location = new Point(50, 310);
+            labelB.Location = new Point(70, 310);
             Controls.Add(labelB);
 
             //TextBox - txtC
             txtC = new TextBox();
             txtC.Location = new Point(160, 340);
-            txtC.Font = new Font("Algerian", 13);
+            txtC.Font = new Font("Arial", 13, FontStyle.Bold);
             txtC.Width = 100;
             txtC.Height = 80;
+            txtC.BackColor = Color.MistyRose;
+            txtC.ForeColor = Color.MediumVioletRed;
             Controls.Add(txtC);
 
-            //LabelC
+            //Label - labelC
             labelC = new Label();
-            labelC.Text = "Сторона C";
-            labelC.Font = new Font("Arial", 13, FontStyle.Italic);
+            labelC.Text = "Külg C";
+            labelC.Font = new Font("Algerian", 13, FontStyle.Bold | FontStyle.Italic);
             labelC.ForeColor = Color.Crimson;
             labelC.AutoSize = true;
-            labelC.Location = new Point(50, 340);
+            labelC.Location = new Point(70, 340);
             Controls.Add(labelC);
 
             //TextBox - txtnurk
             txtnurk = new TextBox();
             txtnurk.Location = new Point(160, 370);
-            txtnurk.Font = new Font("Algerian", 13);
+            txtnurk.Font = new Font("Arial", 13, FontStyle.Bold);
             txtnurk.Width = 100;
             txtnurk.Height = 80;
+            txtnurk.BackColor = Color.MistyRose;
+            txtnurk.ForeColor = Color.MediumVioletRed;
             Controls.Add(txtnurk);
 
-            //labelnurk
+            //Label - labelnurk
             labelnurk = new Label();
-            labelnurk.Text = "Угол";
-            labelnurk.Font = new Font("Arial", 13, FontStyle.Italic);
+            labelnurk.Text = "Nurk";
+            labelnurk.Font = new Font("Algerian", 13, FontStyle.Bold | FontStyle.Italic);
             labelnurk.ForeColor = Color.Crimson;
             labelnurk.AutoSize = true;
-            labelnurk.Location = new Point(50, 370);
+            labelnurk.Location = new Point(70, 370);
             Controls.Add(labelnurk);
 
             //TextBox - txtH
             txtH = new TextBox();
             txtH.Location = new Point(160, 400);
-            txtH.Font = new Font("Algerian", 13);
+            txtH.Font = new Font("Arial", 13, FontStyle.Bold);
             txtH.Width = 100;
             txtH.Height = 80;
+            txtH.BackColor = Color.MistyRose;
+            txtH.ForeColor = Color.MediumVioletRed;
             Controls.Add(txtH);
 
-            //labelH
+            //Label - labelH
             labelH = new Label();
-            labelH.Text = "Высота";
-            labelH.Font = new Font("Arial", 13, FontStyle.Italic);
+            labelH.Text = "Kõrgus";
+            labelH.Font = new Font("Algerian", 13, FontStyle.Bold | FontStyle.Italic);
             labelH.ForeColor = Color.Crimson;
             labelH.AutoSize = true;
-            labelH.Location = new Point(50, 400);
+            labelH.Location = new Point(70, 400);
             Controls.Add(labelH);
 
-            //listView1
+            //ListView - listView1
             listView1 = new ListView();
             listView1.Location = new Point(10, 10);
-            listView1.Font = new Font("Arial", 10);
-            listView1.Width = 370;
+            listView1.Font = new Font("Arial", 12);
+            listView1.Width = 360;
             listView1.Height = 250;
             listView1.View = View.Details;
-            listView1.Columns.Add("Поле", 150);
-            listView1.Columns.Add("Значение", 200);
+            listView1.Columns.Add("Väli", 165);
+            listView1.Columns.Add("Väärtused", 190);
             listView1.BackColor = Color.Lavender;
             listView1.ForeColor = Color.MediumSlateBlue;
             Controls.Add(listView1);
 
             //pictureBox
             pictureBox = new PictureBox();
-            pictureBox.Size = new Size(500, 500);
+            pictureBox.Size = new Size(480, 350);
             pictureBox.Location = new Point(400, 150);
             pictureBox.SizeMode = PictureBoxSizeMode.Zoom; 
+            pictureBox.BackColor = Color.LavenderBlush;
             Controls.Add(pictureBox);
-            pictureBox.Paint += PictureBox_Paint; 
+            pictureBox.Paint += PictureBox_Paint;
 
+            //colordialog
+            colordialog = new ColorDialog();
+        } 
+        //В диалоговом окне можно выбрать цвет заливки для треугольника
+        private void Color_Click(object sender, EventArgs e)
+        {
+            if (colordialog.ShowDialog() == DialogResult.OK)
+            {
+                taidab = colordialog.Color; // Сохраняем выбранный цвет
+                pictureBox.Invalidate(); // Обновляем PictureBox для отображения нового цвета
+            }
         }
-
+        //Рисует треугольник используя длины сторон (a, b, c) и угол между сторонами 
         private void PictureBox_Paint(object sender, PaintEventArgs e)
         {
+            //Проверяет, могут ли значения, введённые в текстовые поля быть преобразованы в числа типа double
+            // если числа введённые правильно то преобразовывают в числа double для рисование треугольника
             if (!double.TryParse(txtA.Text, out double a) || 
                 !double.TryParse(txtB.Text, out double b) ||
                 !double.TryParse(txtC.Text, out double c) ||
@@ -155,24 +195,31 @@ namespace Triangle
             {
                 return;
             }
+            // Переводим угла в радиан, так как функции Math.Cos() и Math.Sin() ожидают угол в радианах, а не в градусах
+            double raadiaan = nurgaAste * Math.PI / 180;
+            // Вычисляем координаты вершин треугольника
+            int x2 = 200 + (int)(a * 10); 
+            int y2 = 250;
+            int x3 = 200 + (int)(b * Math.Cos(raadiaan) * 10);
+            int y3 = 250 - (int)(b * Math.Sin(raadiaan) * 10);
 
-            double raadiaanNurk = nurgaAste * Math.PI / 180;
-            int x2 = 100 + (int)(a * 10); 
-            int y2 = 200;
-            int x3 = 100 + (int)(b * Math.Cos(raadiaanNurk) * 10);
-            int y3 = 200 - (int)(b * Math.Sin(raadiaanNurk) * 10);
-
+            // Создаются точки для вершин 
             Point p1 = new Point(100, 200);
             Point p2 = new Point(x2, y2);
             Point p3 = new Point(x3, y3);
 
+            // Рисуем треугольник
             Graphics g = e.Graphics;
+            SolidBrush brush = new SolidBrush(taidab); // Кисть для заполнение треугольника цветом
+            Point[] punktid = { p1, p2, p3 }; // Массив точек треугольника
+            g.FillPolygon(brush, punktid); // Заполняем треугольник цветом
+
+            // Рисуем контур треугольника
             Pen pen = new Pen(Color.Blue, 5);
             g.DrawLine(pen, p1, p2);
             g.DrawLine(pen, p2, p3);
             g.DrawLine(pen, p3, p1);
         }
-
         private void Btn_Click(object sender, EventArgs e)
         {
             double a, b, nurk, h,c;
@@ -183,16 +230,18 @@ namespace Triangle
             nurk = Convert.ToDouble(txtnurk.Text);
 
             Triangle triangle = new Triangle(a, b, c, h, nurk);
+            triangles.Add(triangle);
+
             listView1.Items.Clear();
-            listView1.Items.Add("Сторона A");
-            listView1.Items.Add("Сторона B");
-            listView1.Items.Add("Сторона C");
-            listView1.Items.Add("Высота");
-            listView1.Items.Add("Угол");
-            listView1.Items.Add("Полупериметра");
-            listView1.Items.Add("Площадь");
-            listView1.Items.Add("Существует?");
-            listView1.Items.Add("Спецификатор");
+            listView1.Items.Add("Külg A");
+            listView1.Items.Add("Külg B");
+            listView1.Items.Add("Külg C");
+            listView1.Items.Add("Kõrgus");
+            listView1.Items.Add("Nurk");
+            listView1.Items.Add("Poolperimeeter");
+            listView1.Items.Add("Piirkond");
+            listView1.Items.Add("Kas see on olemas?");
+            listView1.Items.Add("Täpsustaja");
             listView1.Items[0].SubItems.Add(triangle.outputA());
             listView1.Items[1].SubItems.Add(triangle.outputB());
             listView1.Items[2].SubItems.Add(triangle.outputC());
@@ -202,11 +251,11 @@ namespace Triangle
             listView1.Items[6].SubItems.Add(Convert.ToString(triangle.PindalaArvutamine()));
             if (triangle.ExistTriange)
             {
-                listView1.Items[7].SubItems.Add("Существует");
+                listView1.Items[7].SubItems.Add("On olemas");
             }
             else
             {
-                listView1.Items[7].SubItems.Add("Не существует");
+                listView1.Items[7].SubItems.Add("Ei ole olemas");
             }
             //Метод, позволяющий определить тип треугольника и определив тип,
             //меняющий отображаемую картинку на соответствующую.

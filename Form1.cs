@@ -23,17 +23,19 @@ namespace Triangle
         {
             this.Height = 500;
             this.Width = 800;
-            this.Text = "Работа с треугольником";
-            //Button
+            this.Text = "Töötamine kolmnurgaga";
+            //Button - btn
             btn = new Button();
-            btn.Text = "Запуск";
+            btn.Text = "Käivitamine";
             btn.Font = new Font("Arial", 18, FontStyle.Italic);
             btn.AutoSize = true;
+            btn.Height = 80;
+            btn.Width = 50;
             btn.FlatAppearance.BorderSize = 6;
-            btn.FlatAppearance.BorderColor = Color.Pink;
+            btn.FlatAppearance.BorderColor = Color.LightSeaGreen;
             btn.FlatStyle = FlatStyle.Flat;
             btn.Location = new Point(450, 20);
-            btn.BackColor = Color.Plum;
+            btn.BackColor = Color.Khaki;
             Controls.Add(btn);
             btn.Click += Btn_Click;
 
@@ -45,15 +47,14 @@ namespace Triangle
             txtA.Height = 80;
             Controls.Add(txtA);
 
-            //LabelA
+            //Label - labelA
             labelA = new Label();
-            labelA.Text = "Сторона A";
-            labelA.Font = new Font("Arial", 13, FontStyle.Italic);
-            labelA.ForeColor = Color.Crimson;
+            labelA.Text = "Külg A";
+            labelA.Font = new Font("Arial", 13, FontStyle.Bold | FontStyle.Underline);
+            labelA.ForeColor = Color.RoyalBlue;
             labelA.AutoSize = true;
-            labelA.Location = new Point(50, 350);
+            labelA.Location = new Point(90, 350);
             Controls.Add(labelA);
-
 
             //TextBox - txtB
             txtB = new TextBox();
@@ -63,13 +64,13 @@ namespace Triangle
             txtB.Height = 80;
             Controls.Add(txtB);
 
-            //labelB
+            //Label - labelB
             labelB = new Label();
-            labelB.Text = "Сторона B";
-            labelB.Font = new Font("Arial", 13, FontStyle.Italic);
-            labelB.ForeColor = Color.Crimson;
+            labelB.Text = "Külg B";
+            labelB.Font = new Font("Arial", 13, FontStyle.Bold | FontStyle.Underline);
+            labelB.ForeColor = Color.RoyalBlue;
             labelB.AutoSize = true;
-            labelB.Location = new Point(50, 380);
+            labelB.Location = new Point(90, 380);
             Controls.Add(labelB);
 
             //TextBox - txtC
@@ -80,24 +81,26 @@ namespace Triangle
             txtC.Height = 80;
             Controls.Add(txtC);
 
-            //LabelC
+            //Label - labelC
             labelC = new Label();
-            labelC.Text = "Сторона C";
-            labelC.Font = new Font("Arial", 13, FontStyle.Italic);
-            labelC.ForeColor = Color.Crimson;
+            labelC.Text = "Külg C";
+            labelC.Font = new Font("Arial", 13, FontStyle.Bold | FontStyle.Underline);
+            labelC.ForeColor = Color.RoyalBlue;
             labelC.AutoSize = true;
-            labelC.Location = new Point(50, 410);
+            labelC.Location = new Point(90, 410);
             Controls.Add(labelC);
 
             //listView1
             listView1 = new ListView();
             listView1.Location = new Point(10, 10);
             listView1.Font = new Font("Arial", 10);
-            listView1.Width = 350;
-            listView1.Height = 200;
+            listView1.Width = 360;
+            listView1.Height = 250;
             listView1.View = View.Details;
-            listView1.Columns.Add("Поле", 150);
-            listView1.Columns.Add("Значение", 200);
+            listView1.Columns.Add("Väli", 165);
+            listView1.Columns.Add("Väärtused", 190);
+            listView1.BackColor = Color.Silver;
+            listView1.ForeColor = Color.DarkBlue;
             Controls.Add(listView1);
 
             //pictureBox
@@ -117,16 +120,16 @@ namespace Triangle
 
             Triangle triangle = new Triangle(a, b, c);
             listView1.Items.Clear();
-            listView1.Items.Add("Сторона A");
-            listView1.Items.Add("Сторона B");
-            listView1.Items.Add("Сторона C");
+            listView1.Items.Add("Külg A");
+            listView1.Items.Add("Külg B");
+            listView1.Items.Add("Külg C");
             listView1.Items.Add("Периметр");
-            listView1.Items.Add("Площадь");
-            listView1.Items.Add("Высота к стороне А");
-            listView1.Items.Add("Высота к стороне В");
-            listView1.Items.Add("Высота к стороне С");
-            listView1.Items.Add("Существует?");
-            listView1.Items.Add("Спецификатор");
+            listView1.Items.Add("Piirkond");
+            listView1.Items.Add("Kõrgus küljele A");
+            listView1.Items.Add("Kõrgus küljele B");
+            listView1.Items.Add("Kõrgus küljele C");
+            listView1.Items.Add("Kas see on olemas?");
+            listView1.Items.Add("Täpsustaja");
             listView1.Items[0].SubItems.Add(triangle.outputA());
             listView1.Items[1].SubItems.Add(triangle.outputB());
             listView1.Items[2].SubItems.Add(triangle.outputC());
@@ -137,11 +140,11 @@ namespace Triangle
             listView1.Items[7].SubItems.Add(Convert.ToString(triangle.HeightC()));
             if (triangle.ExistTriange)
             {
-                listView1.Items[8].SubItems.Add("Существует");
+                listView1.Items[8].SubItems.Add("On olemas");
             }
             else
             {
-                listView1.Items[8].SubItems.Add("Не существует");
+                listView1.Items[8].SubItems.Add("Ei ole olemas");
             }
             //Метод, позволяющий определить тип треугольника и определив тип,
             //меняющий отображаемую картинку на соответствующую.

@@ -75,7 +75,7 @@ namespace Triangle
         //одно свойство
         public double PindalaArvutamine()
         {
-            return 0.5 * a * b * Math.Sin(nurk);
+            return 0.5 * a * b * Math.Sin(nurk * Math.PI / 180);  // nurk переводится в радиан, чтобы значение не было отрицательным
         }
         // Метод для нахождения высоты к стороне a
         public double HeightA()
@@ -212,24 +212,24 @@ namespace Triangle
                         xmlwriter.WriteStartElement("Triangle");
 
                         // Сохранение всех полей и свойств треугольника
-                        xmlwriter.WriteElementString("Сторона A", triangle.a.ToString());
-                        xmlwriter.WriteElementString("Сторона B", triangle.b.ToString());
-                        xmlwriter.WriteElementString("Сторона C", triangle.c.ToString());
-                        xmlwriter.WriteElementString("Высота", triangle.h.ToString());
-                        xmlwriter.WriteElementString("Угол", triangle.nurk.ToString());
-                        xmlwriter.WriteElementString("Полупериметра", triangle.Poolperimeetrit().ToString());
-                        xmlwriter.WriteElementString("Площадь", triangle.PindalaArvutamine().ToString());
-                        xmlwriter.WriteElementString("Спецификатор", triangle.TriangleType_Form2);
-                        xmlwriter.WriteEndElement(); // Закрываем элемент Triangle
+                        xmlwriter.WriteElementString("Külg_A", triangle.a.ToString());
+                        xmlwriter.WriteElementString("Külg_B", triangle.b.ToString());
+                        xmlwriter.WriteElementString("Külg_C", triangle.c.ToString());
+                        xmlwriter.WriteElementString("Kõrgus", triangle.h.ToString());
+                        xmlwriter.WriteElementString("Nurk", triangle.nurk.ToString());
+                        xmlwriter.WriteElementString("Poolperimeeter", triangle.Poolperimeetrit().ToString());
+                        xmlwriter.WriteElementString("Piirkond", triangle.PindalaArvutamine().ToString());
+                        xmlwriter.WriteElementString("Täpsustaja", triangle.TriangleType_Form2);
+                        xmlwriter.WriteEndElement(); // Закрываем элемент 
                     }
 
-                    xmlwriter.WriteEndElement(); // Закрываем элемент Triangles
+                    xmlwriter.WriteEndElement(); // Закрываем элемент 
                     xmlwriter.WriteEndDocument(); // Завершаем документ
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Ошибка при сохранении в файл: " + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Viga faili salvestamisel: " + ex.Message, "Viga!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }
