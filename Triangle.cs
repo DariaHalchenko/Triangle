@@ -202,29 +202,31 @@ namespace Triangle
         {
             try
             {
+                // Создается XML Writer для записи в файл
                 using (XmlWriter xmlwriter = XmlWriter.Create(filePath))
                 {
-                    xmlwriter.WriteStartDocument();
-                    xmlwriter.WriteStartElement("Triangles");
+                    xmlwriter.WriteStartDocument(); // Начинает
+                    xmlwriter.WriteStartElement("Triangles"); // Открывает элемент "Triangles"
 
                     foreach (var triangle in triangles)
                     {
-                        xmlwriter.WriteStartElement("Triangle");
+                        xmlwriter.WriteStartElement("Triangle"); 
 
-                        // Сохранение всех полей и свойств треугольника
-                        xmlwriter.WriteElementString("Külg_A", triangle.a.ToString());
-                        xmlwriter.WriteElementString("Külg_B", triangle.b.ToString());
-                        xmlwriter.WriteElementString("Külg_C", triangle.c.ToString());
-                        xmlwriter.WriteElementString("Kõrgus", triangle.h.ToString());
-                        xmlwriter.WriteElementString("Nurk", triangle.nurk.ToString());
-                        xmlwriter.WriteElementString("Poolperimeeter", triangle.Poolperimeetrit().ToString());
-                        xmlwriter.WriteElementString("Piirkond", triangle.PindalaArvutamine().ToString());
-                        xmlwriter.WriteElementString("Täpsustaja", triangle.TriangleType_Form2);
-                        xmlwriter.WriteEndElement(); // Закрываем элемент 
+                        // Записываем каждый атрибут треугольника как отдельный элемент
+                        xmlwriter.WriteElementString("Külg_A", triangle.a.ToString()); 
+                        xmlwriter.WriteElementString("Külg_B", triangle.b.ToString()); 
+                        xmlwriter.WriteElementString("Külg_C", triangle.c.ToString()); 
+                        xmlwriter.WriteElementString("Kõrgus", triangle.h.ToString()); 
+                        xmlwriter.WriteElementString("Nurk", triangle.nurk.ToString()); 
+                        xmlwriter.WriteElementString("Poolperimeeter", triangle.Poolperimeetrit().ToString()); 
+                        xmlwriter.WriteElementString("Piirkond", triangle.PindalaArvutamine().ToString()); 
+                        xmlwriter.WriteElementString("Täpsustaja", triangle.TriangleType_Form2); 
+
+                        xmlwriter.WriteEndElement(); // Закрываем элемент "Triangle" 
                     }
 
-                    xmlwriter.WriteEndElement(); // Закрываем элемент 
-                    xmlwriter.WriteEndDocument(); // Завершаем документ
+                    xmlwriter.WriteEndElement(); // Закрывает элемент "Triangles"
+                    xmlwriter.WriteEndDocument(); // Завершаем
                 }
             }
             catch (Exception ex)
