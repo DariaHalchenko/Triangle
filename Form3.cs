@@ -31,16 +31,16 @@ namespace Triangle
             MessageBox.Show("Andmed on üles laetud ja vormil kuvatud.","Edu");
 
             // Создаем новую строку данных
-
+            Form2 form2 = new Form2(a, b, c, h);
             DataRow newRow = ds.Tables["Triangle"].NewRow();
-            newRow["Külg_A"] = Forms2.txtKylgA.Text;
-            newRow["Külg_B"] = txtKylgB.Text;
-            newRow["Külg_C"] = txtKylgC.Text;
-            newRow["Kõrgus"] = txtKorgus.Text;
-            newRow["Nurk"] = txtNurk.Text;
-            newRow["Poolperimeeter"] = txtPoolperimeeter.Text;
-            newRow["Piirkond"] = txtPiirkond.Text;
-            newRow["Täpsustaja"] = txtTäpsustaja.Text;
+            newRow["Külg_A"] = form2.txtKylgA.Text;
+            newRow["Külg_B"] = form2.txtKylgB.Text;
+            newRow["Külg_C"] = form2.txtKylgC.Text;
+            newRow["Kõrgus"] = form2.txtKorgus.Text;
+            newRow["Nurk"] = form2.txtNurk.Text;
+            newRow["Poolperimeeter"] = form2.txtPoolperimeeter.Text;
+            newRow["Piirkond"] = form2.txtPiirkond.Text;
+            newRow["Täpsustaja"] = form2.txtTäpsustaja.Text;
 
             // Добавляем новую строку в таблицу
             ds.Tables["Triangle"].Rows.Add(newRow);
