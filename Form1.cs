@@ -111,76 +111,84 @@ namespace Triangle
             Controls.Add(pictureBox);    
         }
 
+        int t = 0;
         private void Btn_Click(object sender, EventArgs e)
         {
-            double a, b, c;
-            a = Convert.ToDouble(txtA.Text);
-            b = Convert.ToDouble(txtB.Text);
-            c = Convert.ToDouble(txtC.Text);
-
-            Triangle triangle = new Triangle(a, b, c);
-            listView1.Items.Clear();
-            listView1.Items.Add("Külg A");
-            listView1.Items.Add("Külg B");
-            listView1.Items.Add("Külg C");
-            listView1.Items.Add("Периметр");
-            listView1.Items.Add("Piirkond");
-            listView1.Items.Add("Kõrgus küljele A");
-            listView1.Items.Add("Kõrgus küljele B");
-            listView1.Items.Add("Kõrgus küljele C");
-            listView1.Items.Add("Kas see on olemas?");
-            listView1.Items.Add("Täpsustaja");
-            listView1.Items[0].SubItems.Add(triangle.outputA());
-            listView1.Items[1].SubItems.Add(triangle.outputB());
-            listView1.Items[2].SubItems.Add(triangle.outputC());
-            listView1.Items[3].SubItems.Add(Convert.ToString(triangle.Perimeter()));
-            listView1.Items[4].SubItems.Add(Convert.ToString(triangle.Surface()));
-            listView1.Items[5].SubItems.Add(Convert.ToString(triangle.HeightA()));
-            listView1.Items[6].SubItems.Add(Convert.ToString(triangle.HeightB()));
-            listView1.Items[7].SubItems.Add(Convert.ToString(triangle.HeightC()));
-            if (triangle.ExistTriange)
+            t++;
+            if (t % 3 == 0)
             {
-                listView1.Items[8].SubItems.Add("On olemas");
+                // Добавьте еще один метод на кнопку Запуск. Для перехода с первой формы на вторую.
+                Form2 form2 = new Form2();
+                form2.Show();
             }
             else
             {
-                listView1.Items[8].SubItems.Add("Ei ole olemas");
-            }
-            //Метод, позволяющий определить тип треугольника и определив тип,
-            //меняющий отображаемую картинку на соответствующую.
-            //Название типа треугольника отобразите в значении спецификатора.
-            if (triangle.ExistTriange)
-            {
-                if (triangle.TriangleType == "Võrdkülgne")
+                double a, b, c;
+                a = Convert.ToDouble(txtA.Text);
+                b = Convert.ToDouble(txtB.Text);
+                c = Convert.ToDouble(txtC.Text);
+
+                Triangle triangle = new Triangle(a, b, c);
+                listView1.Items.Clear();
+
+                listView1.Items.Add("Külg A");
+                listView1.Items.Add("Külg B");
+                listView1.Items.Add("Külg C");
+                listView1.Items.Add("Периметр");
+                listView1.Items.Add("Piirkond");
+                listView1.Items.Add("Kõrgus küljele A");
+                listView1.Items.Add("Kõrgus küljele B");
+                listView1.Items.Add("Kõrgus küljele C");
+                listView1.Items.Add("Kas see on olemas?");
+                listView1.Items.Add("Täpsustaja");
+                listView1.Items[0].SubItems.Add(triangle.outputA());
+                listView1.Items[1].SubItems.Add(triangle.outputB());
+                listView1.Items[2].SubItems.Add(triangle.outputC());
+                listView1.Items[3].SubItems.Add(Convert.ToString(triangle.Perimeter()));
+                listView1.Items[4].SubItems.Add(Convert.ToString(triangle.Surface()));
+                listView1.Items[5].SubItems.Add(Convert.ToString(triangle.HeightA()));
+                listView1.Items[6].SubItems.Add(Convert.ToString(triangle.HeightB()));
+                listView1.Items[7].SubItems.Add(Convert.ToString(triangle.HeightC()));
+                if (triangle.ExistTriange)
                 {
-                    listView1.Items[9].SubItems.Add("Võrdkülgne");
-                    pictureBox.Image = Image.FromFile(@"..\..\Vordkulgne.png"); 
-                }
-                else if (triangle.TriangleType == "Võrdhaarne")
-                {
-                    listView1.Items[9].SubItems.Add("Võrdhaarne");
-                    pictureBox.Image = Image.FromFile(@"..\..\Vordhaarne.png"); 
-                }
-                else if (triangle.TriangleType == "Skaleeni kolmnurk")
-                {
-                    listView1.Items[9].SubItems.Add("Skaleeni kolmnurk");
-                    pictureBox.Image = Image.FromFile(@"..\..\Skaleeni kolmnurk.jpg"); 
+                    listView1.Items[8].SubItems.Add("On olemas");
                 }
                 else
                 {
-                    pictureBox.Image = null; 
+                    listView1.Items[8].SubItems.Add("Ei ole olemas");
                 }
-            }
-            else
-            {
-                pictureBox.Image = null; 
-            }
+                //Метод, позволяющий определить тип треугольника и определив тип,
+                //меняющий отображаемую картинку на соответствующую.
+                //Название типа треугольника отобразите в значении спецификатора.
+                if (triangle.ExistTriange)
+                {
+                    if (triangle.TriangleType == "Võrdkülgne")
+                    {
+                        listView1.Items[9].SubItems.Add("Võrdkülgne");
+                        pictureBox.Image = Image.FromFile(@"..\..\Vordkulgne.png");
+                    }
+                    else if (triangle.TriangleType == "Võrdhaarne")
+                    {
+                        listView1.Items[9].SubItems.Add("Võrdhaarne");
+                        pictureBox.Image = Image.FromFile(@"..\..\Vordhaarne.png");
+                    }
+                    else if (triangle.TriangleType == "Skaleeni kolmnurk")
+                    {
+                        listView1.Items[9].SubItems.Add("Skaleeni kolmnurk");
+                        pictureBox.Image = Image.FromFile(@"..\..\Skaleeni kolmnurk.jpg");
+                    }
+                    else
+                    {
+                        pictureBox.Image = null;
+                    }
+                }
+                else
+                {
+                    pictureBox.Image = null;
+                }
 
-            pictureBox.Invalidate(); // Обновляем PictureBox, чтобы отобразить новую картинку
-
-            // Добавьте еще один метод на кнопку Запуск. Для перехода с первой формы на вторую.
-            Form2 form2 = new Form2();
-            form2.Show();
+                pictureBox.Invalidate(); // Обновляем PictureBox, чтобы отобразить новую картинку
+            }
         }
-    }
+    }   
 }

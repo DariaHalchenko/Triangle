@@ -14,7 +14,7 @@ namespace Triangle
     //В этой форме применяю свои методы, аргументы, конструкторы и  свойства.
     public partial class Form2 : Form
     {
-        Button btn, color;
+        Button btn, color, btn2;
         TextBox txtA, txtB, txtnurk, txtH, txtC;
         ListView listView1;
         Label labelA, labelB, labelnurk, labelH, labelC;
@@ -40,6 +40,19 @@ namespace Triangle
             btn.BackColor = Color.Plum;
             Controls.Add(btn);
             btn.Click += Btn_Click;
+
+            //Button - btn2
+            btn2 = new Button();
+            btn2.Text = "Tabel";
+            btn2.Font = new Font("Algerian", 18, FontStyle.Italic);
+            btn2.AutoSize = true;
+            btn2.FlatAppearance.BorderSize = 6;
+            btn2.FlatAppearance.BorderColor = Color.Pink;
+            btn2.FlatStyle = FlatStyle.Flat;
+            btn2.Location = new Point(650, 20);
+            btn2.BackColor = Color.Plum;
+            Controls.Add(btn2);
+            btn2.Click += Btn2_Click; 
 
             //Button - color
             color = new Button();
@@ -173,7 +186,14 @@ namespace Triangle
 
             //colordialog
             colordialog = new ColorDialog();
-        } 
+        }
+
+        private void Btn2_Click(object sender, EventArgs e)
+        {
+            Form3 form3 = new Form3();
+            form3.Show();
+        }
+
         //В диалоговом окне можно выбрать цвет заливки для треугольника
         private void Color_Click(object sender, EventArgs e)
         {
@@ -197,11 +217,12 @@ namespace Triangle
             }
             // Переводим угла в радиан, так как функции Math.Cos() и Math.Sin() ожидают угол в радианах, а не в градусах
             double raadiaan = nurgaAste * Math.PI / 180;
+
             // Вычисляем координаты вершин треугольника
-            int x2 = 200 + (int)(a * 10); 
-            int y2 = 250;
-            int x3 = 200 + (int)(b * Math.Cos(raadiaan) * 10);
-            int y3 = 250 - (int)(b * Math.Sin(raadiaan) * 10);
+            int x2 = 100 + (int)(a * 10);
+            int y2 = 200;
+            int x3 = 100 + (int)(b * Math.Cos(raadiaan) * 10);
+            int y3 = 200 - (int)(b * Math.Sin(raadiaan) * 10);
 
             // Создаются точки для вершин 
             Point p1 = new Point(100, 200);
@@ -233,6 +254,7 @@ namespace Triangle
             triangles.Add(triangle);
 
             listView1.Items.Clear();
+
             listView1.Items.Add("Külg A");
             listView1.Items.Add("Külg B");
             listView1.Items.Add("Külg C");

@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Triangles>
     <Triangle>
-        <Külg_A>15</Külg_A>
-        <Külg_B>14</Külg_B>
-        <Külg_C>15</Külg_C>
-        <Kõrgus>23</Kõrgus>
-        <Nurk>30</Nurk>
-        <Poolperimeeter>22</Poolperimeeter>
-        <Piirkond>52,5</Piirkond>
-        <Täpsustaja>Võrdhaarne</Täpsustaja>
+        <Külg_A>22</Külg_A>
+        <Külg_B>22</Külg_B>
+        <Külg_C>22</Külg_C>
+        <Kõrgus>33</Kõrgus>
+        <Nurk>56</Nurk>
+        <Poolperimeeter>33</Poolperimeeter>
+        <Piirkond>200,62709255832</Piirkond>
+        <Täpsustaja>Võrdkülgne</Täpsustaja>
     </Triangle>
 </Triangles>
