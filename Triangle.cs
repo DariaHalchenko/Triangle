@@ -8,7 +8,7 @@ using System.Xml;
 
 namespace Triangle
 {
-    class Triangle
+    public class Triangle
     {
         public double a;
         public double b;

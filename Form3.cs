@@ -1,72 +1,52 @@
 ﻿using System;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 
 namespace Triangle
 {
     public partial class Form3 : Form
     {
-        DataSet ds; 
-        DataGridView dg; 
+        private DataGridView dg;
+        private DataSet ds;
 
         public Form3()
         {
-            InitializeComponent();
-
-            this.Width = 800; 
-            this.Height = 400; 
-
-            ds = new DataSet("XML file"); 
-            ds.ReadXml(@"..\..\kolmnurgad.xml");
+            this.Width = 700;
+            this.Height = 200;
 
             dg = new DataGridView();
             dg.Location = new Point(10, 10);
             dg.Size = new Size(760, 350);
-            dg.DataSource = ds.Tables["Triangle"];
-            
-
             Controls.Add(dg);
 
-            MessageBox.Show("Andmed on üles laetud ja vormil kuvatud.","Edu");
+            ds = new DataSet("XML file");
 
-            // Создаем новую строку данных
-            Form2 form2 = new Form2(a, b, c, h);
-            DataRow newRow = ds.Tables["Triangle"].NewRow();
-            newRow["Külg_A"] = form2.txtKylgA.Text;
-            newRow["Külg_B"] = form2.txtKylgB.Text;
-            newRow["Külg_C"] = form2.txtKylgC.Text;
-            newRow["Kõrgus"] = form2.txtKorgus.Text;
-            newRow["Nurk"] = form2.txtNurk.Text;
-            newRow["Poolperimeeter"] = form2.txtPoolperimeeter.Text;
-            newRow["Piirkond"] = form2.txtPiirkond.Text;
-            newRow["Täpsustaja"] = form2.txtTäpsustaja.Text;
-
-            // Добавляем новую строку в таблицу
-            ds.Tables["Triangle"].Rows.Add(newRow);
-
-            // Сохраняем изменения в XML файл (перезаписываем весь файл)
-            try
+            string filePath = @"..\..\kolmnurgad.xml";
+            if (File.Exists(filePath))
             {
-                ds.WriteXml(@"..\..\kolmnurgad.xml");
-                MessageBox.Show("Новый треугольник добавлен и сохранён.", "Успех");
+                try
+                {
+                    ds.ReadXml(filePath);
 
-                // Обновляем DataGridView, чтобы отобразить все данные
-                dg.DataSource = ds.Tables["Triangle"];
-
-                // Очищаем поля для ввода
-                txtKylgA.Clear();
-                txtKylgB.Clear();
-                txtKylgC.Clear();
-                txtKorgus.Clear();
-                txtNurk.Clear();
-                txtPoolperimeeter.Clear();
-                txtPiirkond.Clear();
-                txtTäpsustaja.Clear();
+                    if (ds.Tables.Contains("Triangle"))
+                    {
+                        dg.DataSource = ds.Tables["Triangle"];
+                    }
+                    else
+                    {
+                        MessageBox.Show("Tabelit ei leitud.", "Viga");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Viga laadimisel" + ex.Message, "Viga");
+                }
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show("Ошибка сохранения данных в файл: " + ex.Message, "Ошибка");
+                MessageBox.Show("Faili ei leitud", "Viga");
             }
         }
     }

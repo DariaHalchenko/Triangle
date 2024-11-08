@@ -2,12 +2,12 @@
 <Triangles>
     <Triangle>
         <Külg_A>22</Külg_A>
-        <Külg_B>22</Külg_B>
+        <Külg_B>23</Külg_B>
         <Külg_C>22</Külg_C>
-        <Kõrgus>33</Kõrgus>
-        <Nurk>56</Nurk>
-        <Poolperimeeter>33</Poolperimeeter>
-        <Piirkond>200,62709255832</Piirkond>
-        <Täpsustaja>Võrdkülgne</Täpsustaja>
+        <Kõrgus>16</Kõrgus>
+        <Nurk>45</Nurk>
+        <Poolperimeeter>33,5</Poolperimeeter>
+        <Piirkond>178,898015640197</Piirkond>
+        <Täpsustaja>Võrdhaarne</Täpsustaja>
     </Triangle>
 </Triangles>
